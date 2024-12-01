@@ -1,0 +1,67 @@
+1. Docker installation
+2. Open VS code 
+3. Sign in to github.com and create repo 
+4. clone repo on vs code
+5. Create a basic python website in streamlit
+   - Create virtual env
+      - pip install virtualenv
+      - python -m venv myenv
+      - myenv/Scripts/activate 
+      - pip install streamlit 
+      - create a file named main.py inside same folder as myenv
+        NOT INSIDE myenv  with code
+                  import streamlit as st
+                  st.title('Hello world')
+
+6. Execute and see output TYPE IN TERMINAL --->>> streamlit run main.py
+7. Sign in to docker hub
+8. Go to VS Code and Create a file named Dockerfile (IN SAME FOLDER AS main.py)
+   - Create another file in VS Code same folder as main.py named
+     requirements.txt
+
+      Inside the requirements.txt write
+       
+       streamlit==VERSION_NUMBER_WRITE_HERE
+       
+       For example streamlit==1.37.2
+
+    TO CHECK STREAMLIT VERSION TYPE IN TERMINAL streamlit --version
+
+9. Inside Dockerfile write
+
+	FROM python:3
+        WORKDIR /app
+	COPY requirements.txt .
+        RUN pip install --no-cache-dir -r requirements.txt
+        COPY . .
+        EXPOSE 8051
+        CMD ["streamlit","run","main.py"] 
+
+
+10. Build docker image TYPE IN TERMINAL 
+
+     docker build -t your_dockerhub_username/your_image_name:tag .
+
+where 
+	your_dockerhub_username - username
+        your_image_name         - any name or text
+        tag	                - v1.0 
+
+11. RUN THE CONTAINER FROM THE DOCKER IMAGE
+
+    docker run -p 8501:8501 your_dockerhub_username/your_image_name:tag
+
+
+12 docker login
+
+13 docker push your_dockerhub_username/your_image_name:tag
+
+ 
+
+
+
+
+
+
+
+
